@@ -60,8 +60,8 @@ app.get("/", (req, res) => {
 })
 
 // Index - I
-app.get("/turtles", async (req, res) => {
-    await Turtle.find({}, (err, allTurtles) => {
+app.get("/turtles", (req, res) => {
+    Turtle.find({}, (err, allTurtles) => {
         res.json(allTurtles)
     })
 })
