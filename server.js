@@ -60,8 +60,10 @@ app.get("/", (req, res) => {
 })
 
 // Index - I
-app.get("/turtles", (req, res) => {
-    res.json(turtles)
+app.get("/turtles", async (req, res) => {
+    await Turtle.find({}, (err, allTurtles) => {
+        res.json(allTurtles)
+    })
 })
 
 // Seed Route
