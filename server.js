@@ -93,16 +93,19 @@ app.delete("/turtles/:index", (req, res) => {
     // turtles.splice(req.params.index, 1)
 
     const index = req.params.index
-    Turtle.findByIdAndDelete(index).catch((err) => console.log(err))
-    res.json(turtles)
+    Turtle.findByIdAndDelete(index, (err, data) => {
+        res.json(data)
+    })
 })
 
 // Update - U
 app.put("/turtles/:index", (req, res) => {
     // turtles[req.params.index] = req.body
 
-    const updatedTurtle = Turtle.findByIdAndUpdate(req.params.index, req.body, {new: true})
-    res.json(turtles)
+    Turtle.findByIdAndUpdate(req.params.index, req.body, {new: true},
+        (err, updatedTurtle) => {
+            res.json(updatedTurtle)
+    })  
 })
 
 // Create - C
