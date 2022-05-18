@@ -113,15 +113,19 @@ app.post("/turtles", (req, res) => {
     // Add the turtle to the array
     // turtles.push(req.body)
 
-    Turtle.create(req.body).catch((err) => res.send(err))
+    Turtle.create(req.body, (err, newTurtle) => {
+        res.json(newTurtle)
+    })
     // Send the whole thing back to confirm it was added
-    res.json(turtles)
+    
 })
 
 // Show - S
 app.get("/turtles/:index", (req, res) => {
-    const showTurtle = Turtle.findById(req.params.index).catch((err) => res.send(err))
-    res.json(turtles[req.params.index])
+    const showTurtle = Turtle.findById(req.params.index, (err, showTurtle) => {
+        res.json(showTurtle)
+    })
+    
 })
 
 // Listen
